@@ -17,6 +17,9 @@ namespace API.Controllers {
 
         //endpoints
 
+        /// <summary> Lista de usuarios
+        /// </summary>
+        /// <returns> Return the user list</returns>
         [HttpGet]
         [AllowAnonymous]
         public async Task <ActionResult<IEnumerable<AppUser>>> GetUser()

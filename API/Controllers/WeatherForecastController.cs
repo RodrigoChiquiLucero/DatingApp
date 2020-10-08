@@ -26,6 +26,8 @@ namespace API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// </summary>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
