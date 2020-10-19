@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,6 @@ export class AccountService {
       map((respose: User) => {
         const user = respose;
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
           this.setCurrenUser(user);
         }
       })
@@ -31,14 +31,14 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrenUser(user);
         }
       })
     );
   }
 
   setCurrenUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
 
